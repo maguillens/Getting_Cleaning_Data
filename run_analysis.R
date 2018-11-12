@@ -1,20 +1,22 @@
 
+setwd("C:/Users/MIGUEL GUILLEN/Desktop/r/UCI HAR Dataset/UCI HAR Dataset")
+
 # Load training data
 
-training = read.csv("UCI HAR Dataset/train/X_train.txt", sep="", header=FALSE)
-training[,562] = read.csv("UCI HAR Dataset/train/Y_train.txt", sep="", header=FALSE)
-training[,563] = read.csv("UCI HAR Dataset/train/subject_train.txt", sep="", header=FALSE)
+training       = read.csv("train/X_train.txt", sep="", header=FALSE)
+training[,562] = read.csv("train/Y_train.txt", sep="", header=FALSE)
+training[,563] = read.csv("train/subject_train.txt", sep="", header=FALSE)
 
 # Load testing data
-testing = read.csv("UCI HAR Dataset/test/X_test.txt", sep="", header=FALSE)
-testing[,562] = read.csv("UCI HAR Dataset/test/Y_test.txt", sep="", header=FALSE)
-testing[,563] = read.csv("UCI HAR Dataset/test/subject_test.txt", sep="", header=FALSE)
+testing       = read.csv("test/X_test.txt", sep="", header=FALSE)
+testing[,562] = read.csv("test/Y_test.txt", sep="", header=FALSE)
+testing[,563] = read.csv("test/subject_test.txt", sep="", header=FALSE)
 
 # Load activity labels
-activityLabels = read.csv("UCI HAR Dataset/activity_labels.txt", sep="", header=FALSE)
+activityLabels = read.csv("activity_labels.txt", sep="", header=FALSE)
 
 # Load features
-features = read.csv("UCI HAR Dataset/features.txt", sep="", header=FALSE)
+features = read.csv("features.txt", sep="", header=FALSE)
 features[,2] = gsub('-mean', 'Mean', features[,2])
 features[,2] = gsub('-std', 'Std', features[,2])
 features[,2] = gsub('[-()]', '', features[,2])
@@ -26,7 +28,6 @@ allData = rbind(training, testing)
 cols <- grep(".*Mean.*|.*Std.*", features[,2])
 
 # Uses descriptive activity names to name the activities in the data set.
-
 # First reduce the features table to what we want
 features <- features[cols,]
 
